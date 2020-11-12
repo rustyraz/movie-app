@@ -5,9 +5,7 @@
       <v-tab>
         <v-badge
           color="orange"
-          :content="
-            favoriteMovies.length ? favoriteMovies.length.toString() : '0'
-          "
+          :content="totalFavoriteMovies ? totalFavoriteMovies : '0'"
           class="mr-2"
         >
           Favorites
@@ -91,7 +89,7 @@
       <!-- FAVORITE MOVIES -->
       <v-tab-item>
         <FavoriteMoviesList
-          :data="{ favoriteMovies, unstarThis, starThis, isFavorite }"
+          :data="{ favoriteMovies, unstarThis, starThis, isFavorite, totalFavoriteMovies }"
           v-if="favoriteMovies"
         />
       </v-tab-item>
@@ -100,7 +98,6 @@
 </template>
 
 <script>
-import { toRefs } from "@vue/composition-api";
 import { MoviesList } from "@/composables/movies/movies";
 import TheCircularProgressIcon from "@/components/Layout/TheCircularProgress";
 import NoDataFound from "./NoDataFound";
@@ -116,7 +113,6 @@ export default {
   setup() {
     const {
       state,
-      favoriteMovies,
       submitForm,
       searchMovieWithTitle,
       loadPrevious,
@@ -126,8 +122,7 @@ export default {
       isFavorite,
     } = MoviesList();
     return {
-      ...toRefs(state),
-      favoriteMovies,
+      ...state, // We spread the state properties here
       submitForm,
       searchMovieWithTitle,
       loadPrevious,
@@ -141,5 +136,5 @@ export default {
 </script>
 
 <style>
-@import "../assets/styles/style.css";
+  @import "../assets/styles/style.css";
 </style>

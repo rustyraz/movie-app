@@ -1,5 +1,5 @@
 <template>
-  <v-card class="movie-card">
+  <v-card class="movie-card" v-if="data">
     <v-card-title>
       <h6 class="grey--text text--darken-2">
         {{ movie.Title }}
@@ -29,6 +29,7 @@ export default {
   props: {
     data: {
       type: Object,
+      required: true
     },
   },
   setup(props) {
