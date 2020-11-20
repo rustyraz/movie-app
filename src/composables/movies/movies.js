@@ -1,16 +1,18 @@
 import { computed, reactive, toRefs } from '@vue/composition-api'
 import { searchMovies } from '@/api/movies.api'
+import store from '@/store'
 
 function MoviesList () {
   // CREATE A REACTIVE PROXY OF THE VARIABLES
   const state = reactive({
-    movieResults: {},
+    movieResults: computed(() => store.getters.getMoviesData),
     currentPage: 0,
     searchError: null,
     isFetching: false,
     searchText: '',
-    favoriteMovies: [],
-    totalFavoriteMovies: computed(() => state.favoriteMovies.length)
+    favoriteMovies: computed(() => store.getters.getFavoriteMovies),
+    totalFavoriteMovies: computed(() => store.getters.getTotalFavoriteMovies)
+    // totalFavoriteMovies: computed(() => state.favoriteMovies.length)
   })
   // SUBMIT THE FORM
   const submitForm = () => {
@@ -22,7 +24,8 @@ function MoviesList () {
     try {
       state.isFetching = true
       const response = await searchMovies(title, page)
-      state.movieResults = response.data
+      store.dispatch('updateState', { key: 'moviesData', data: response.data })
+      // state.movieResults = response.data
       state.isFetching = false
     } catch (error) {
       console.error(error)
@@ -32,8 +35,6 @@ function MoviesList () {
         state.searchError = 'An API fetching error occured'
       }
     }
-    const response = await searchMovies(title, page)
-    state.movieResults = response.data
   }
 
   const loadPrevious = () => {
@@ -50,17 +51,30 @@ function MoviesList () {
 
   // ADD A MOVIE TO THE FAVORITE LIST
   const starThis = movie => {
+    // VUEX STORE DATA
+    const newFavorite = [...store.getters.getFavoriteMovies, movie]
+    store.dispatch('updateState', {
+      key: 'favoriteMovies',
+      data: newFavorite
+    })
     // add to the favorite list
-    state.favoriteMovies.push(movie)
+    // state.favoriteMovies.push(movie)
   }
 
   // REMOVE A MOVIE FROM THE FAVORITE LIST
   const unstarThis = movie => {
     // remove movie form list
-    const position = state.favoriteMovies
-      .map(item => item.imdbID)
-      .indexOf(movie.imdbID)
-    state.favoriteMovies.splice(position, 1)
+    // const position = state.favoriteMovies
+    //   .map(item => item.imdbID)
+    //   .indexOf(movie.imdbID)
+    // state.favoriteMovies.splice(position, 1)
+
+    // VUEX STORE DATA
+    const updatedFavorites = store.getters.getFavoriteMovies.filter(item => item.imdbID !== movie.imdbID)
+    store.dispatch('updateState', {
+      key: 'favoriteMovies',
+      data: updatedFavorites
+    })
   }
 
   // CHECK IF A MOVIE IS IN THE LIST OF FAVORITE

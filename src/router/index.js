@@ -1,23 +1,23 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-Vue.use(VueRouter);
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-//GET the COMPONENTS
-import SearchMovies from "@/components/SearchMovies";
-import FavoriteMovies from "@/components/FavoriteMovies";
+// GET the COMPONENTS
+import SearchMovies from '@/components/SearchMovies'
+import SingleMovieDetails from '@/components/SingleMovieDetails'
+Vue.use(VueRouter)
 
 export default new VueRouter({
-  mode: "history",
+  mode: 'history',
   routes: [
     {
-      path: "/",
-      name: "SearchMovies",
+      path: '/',
+      name: 'SearchMovies',
       component: SearchMovies
     },
     {
-      path: "/favorites",
-      name: "FavoriteMovies",
-      component: FavoriteMovies
+      path: '/favorites',
+      name: 'SingleMovieDetails',
+      component: SingleMovieDetails
     }
   ]
-});
+})

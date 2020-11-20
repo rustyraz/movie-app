@@ -103,7 +103,7 @@ import TheCircularProgressIcon from "@/components/Layout/TheCircularProgress";
 import NoDataFound from "./NoDataFound";
 import FavoriteMoviesList from "./FavoriteMovies";
 import MovieCard from "./MovieCard";
-export default {
+export default {  
   components: {
     FavoriteMoviesList,
     TheCircularProgressIcon,
@@ -121,6 +121,7 @@ export default {
       unstarThis,
       isFavorite,
     } = MoviesList();
+
     return {
       ...state, // We spread the state properties here
       submitForm,

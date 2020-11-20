@@ -20,27 +20,42 @@
 </template>
 
 <script>
-import { computed } from '@vue/composition-api'
+import { MoviesList } from "@/composables/movies/movies";
+// import { computed } from '@vue/composition-api'
 import NoDataFound from "./NoDataFound";
 import MovieCard from "./MovieCard";
-export default {
+export default {  
   components: {
     NoDataFound,
     MovieCard,
   },
-  props: {
-    data: {
-      type: Object,
-    },
-  },
-  setup(props) {
+  setup() {
+    const {
+      state,
+      submitForm,
+      searchMovieWithTitle,
+      loadPrevious,
+      loadNext,
+      starThis,
+      unstarThis,
+      isFavorite,
+    } = MoviesList();
+
     return {
-      totalFavorite: computed(() => props.data.totalFavoriteMovies), // We invoke the the reactivity back
-      favoriteMovies: computed(() => props.data.favoriteMovies),
-      unstarThis: props.data.unstarThis,
-      starThis: props.data.starThis,
-      isFavorite: props.data.isFavorite,
+      ...state, // We spread the state properties here
+      totalFavorite: state.totalFavoriteMovies, // We invoke the the reactivity back
+      submitForm,
+      searchMovieWithTitle,
+      loadPrevious,
+      loadNext,
+      starThis,
+      unstarThis,
+      isFavorite,
     };
   },
 };
 </script>
+
+<style>
+  @import "../assets/styles/style.css";
+</style>
