@@ -1,26 +1,45 @@
 <template>
   <v-card class="movie-card" v-if="data">
-    <v-card-title>
+    <v-img
+      src="https://png.pngtree.com/thumb_back/fw800/back_our/20190621/ourmid/pngtree-steam-wave-international-film-festival-banner-poster-image_195212.jpg"
+      class="white--text align-end"
+      gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+      height="200px"
+      width="230px"
+    >
+      <v-card-title v-text="movie.Title"></v-card-title>
+    </v-img>
+    <!-- <v-card-title>
       <h6 class="grey--text text--darken-2">
         {{ movie.Title }}
       </h6>
-    </v-card-title>
+    </v-card-title>  -->
 
     <v-card-text class="grey--text text--darken-1">
-      <p>Year: {{ movie.Year }}</p>
-      <p>ImdbID: {{ movie.imdbID }}</p>
-      <div class="">
-        <a
-          @click="starThis(movie)"
-          title="add to favorite"
-          v-if="isFavorite(movie)"
-          ><v-icon>mdi-star</v-icon></a
-        >
-        <a @click="unstarThis(movie)" title="remove from favorite" v-else
-          ><v-icon color="orange">mdi-star</v-icon></a
-        >
-      </div>
+      <div>Year: {{ movie.Year }}</div>
+      <div>ImdbID: {{ movie.imdbID }}</div>
     </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+
+      <v-btn icon
+        @click="starThis(movie)"
+        title="add to favorite"
+        v-if="isFavorite(movie)"
+      >
+        <v-icon>mdi-star</v-icon>
+      </v-btn>
+
+      <v-btn icon
+        @click="unstarThis(movie)" 
+        title="remove from favorite" 
+        v-else
+        color="orange"
+      >
+        <v-icon>mdi-star</v-icon>
+      </v-btn>
+
+    </v-card-actions>
   </v-card>
 </template>
 

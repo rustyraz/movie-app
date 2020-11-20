@@ -2,7 +2,7 @@
   <div>
     <v-container fluid grid-list-xl>
       <v-layout wrap v-if="totalFavorite">
-        <h4 class="pl-5 grey--text text--lighten-1">
+        <h4 class="mt-5 pl-5 grey--text text--lighten-1">
           Total results: {{totalFavorite}} movies found
         </h4>
         <div class="movie-list-box pl-3">
