@@ -43,17 +43,32 @@
         </v-container>
 
         <v-container fluid v-else grid-list-xl>
-          <v-layout wrap v-if="movieResults.total">
-            <h4 class="pl-5 grey--text text--lighten-1">
+          <div v-if="movieResults.total">
+            <h4 class="pl-2  grey--text text--lighten-1">
               Total results: {{ movieResults.total }} movies found
             </h4>
-            <div class="movie-list-box pl-3">
-              <MovieCard
-                v-for="(movie, index) in movieResults.data"
-                :key="index"
-                :data="{ movie, unstarThis, starThis, isFavorite }"
-              />
-            </div>
+          <v-layout wrap v-if="movieResults.total">
+            
+            <v-row >
+              <v-col
+              v-for="(movie, index) in movieResults.data"
+              :key="index"
+              xs="12"
+              sm="6"
+              md="4"
+              lg="3"
+              xl="3"
+
+              >
+                <MovieCard                
+                  :data="{ movie, unstarThis, starThis, isFavorite }"
+                />
+              </v-col>
+              
+            </v-row>            
+          </v-layout>
+
+          <v-layout>
             <!-- PAGINATION -->
             <v-row v-if="movieResults.total_pages" class="pa-3">
               <v-col cols="auto" class="mr-auto ml-2">
@@ -81,6 +96,8 @@
             </v-row>
             <!-- END OF PAGINATION -->
           </v-layout>
+
+          </div>
 
           <NoDataFound v-else />
         </v-container>
@@ -137,5 +154,5 @@ export default {
 </script>
 
 <style>
-  @import "../assets/styles/style.css";
+  /* @import "../assets/styles/style.css"; */
 </style>

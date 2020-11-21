@@ -1,18 +1,29 @@
 <template>
   <div>
     <v-container fluid grid-list-xl>
-      <v-layout wrap v-if="totalFavorite">
-        <h4 class="mt-5 pl-5 grey--text text--lighten-1">
+      <div v-if="totalFavorite">
+        <h4 class="pl-5 grey--text text--lighten-1">
           Total results: {{totalFavorite}} movies found
         </h4>
-        <div class="movie-list-box pl-3">
-          <MovieCard
-            v-for="movie in favoriteMovies"
-            :key="movie.imdbID"
-            :data="{ movie, unstarThis, starThis, isFavorite }"
-          />
-        </div>
-      </v-layout>
+        <v-layout wrap>          
+          <v-row >
+              <v-col
+                v-for="movie in favoriteMovies"
+                :key="movie.imdbID"
+                xs="12"
+                sm="6"
+                md="4"
+                lg="3"
+                xl="3"
+              >
+                <MovieCard
+                  :data="{ movie, unstarThis, starThis, isFavorite }"
+                />
+              </v-col>
+          </v-row>
+        </v-layout>
+      </div>
+      
 
       <NoDataFound v-else />
     </v-container>

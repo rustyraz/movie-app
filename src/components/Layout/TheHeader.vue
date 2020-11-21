@@ -5,7 +5,7 @@
       <v-toolbar-title>My Movie App</v-toolbar-title>
     </v-app-bar>
     <!---->
-    <v-navigation-drawer v-model="toggle" floating color="grey lighten-5"   app expand-on-hover>
+    <v-navigation-drawer v-model="toggle" floating color="grey lighten-5"   app >
       <v-list-item>
         <v-list-item-content class="text-center">
          
@@ -54,6 +54,7 @@ export default {
     links: [
       { path: "/", title: "Explore", icon: "mdi-magnify" },
       { path: "/favorites", title: "Favorites", icon: "mdi-star" },
+      { path: "/products", title: "Shop", icon: "mdi-store" },
     ],
   }),
 };

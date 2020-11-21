@@ -1,11 +1,12 @@
 <template>
-  <v-card class="movie-card" v-if="data">
+  <v-card 
+    class="ma-5" hover v-if="data"
+  >
     <v-img
-      src="https://png.pngtree.com/thumb_back/fw800/back_our/20190621/ourmid/pngtree-steam-wave-international-film-festival-banner-poster-image_195212.jpg"
+    src="https://picsum.photos/200"
       class="white--text align-end"
       gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-      height="200px"
-      width="230px"
+      height="120px"
     >
       <v-card-title v-text="movie.Title"></v-card-title>
     </v-img>
